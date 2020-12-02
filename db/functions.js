@@ -1,4 +1,9 @@
 const { createConnection } = require("net");
 
-class DB 
-  createConnection. 
+const connection = require("./connection");
+
+class DB {
+    createConnection.
+}
+
+module.exports = new DB(connection); 
