@@ -9,4 +9,16 @@ class DB {
     });
 };
 
+//View table of department function
+
+//View table of roles function
+
+//View table of employees function
+
+//Insert into department function
+
+//Insert into employee function
+
+//Insert into roles function
+
 module.exports = new DB(connection); 

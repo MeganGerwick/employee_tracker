@@ -10,79 +10,104 @@ const startup = () =>
             type: 'list',
             name: 'startup',
             message: 'What would you like to do?',
-            choices: ['View departments', 'View roles', 'View employees', 'Add dpartments', 'Add roles', 'Add employees', "Update employee roles"],
+            choices: ['View departments', 'View roles', 'View employees', 'Add department', 'Add role', 'Add employee', "Update employee roles"],
         },
     ]);
 
-//View departments
-const viewDepartments = () =>
-    inquirer.prompt([
-        {
-            type: 'list',
-            name: 'viewDepartment',
-            message: 'Which department would you like to view?',
-            choices: ['Sales', 'Finance', 'Customer Service', 'Manufacturing'],
-        },
-    ]);
 
-//View Roles
-const viewroles = () =>
-    inquirer.prompt([
-        {
-            type: 'list',
-            name: 'roles',
-            message: 'Which role would you like to view?',
-            choices: ['Sales leads', 'Sales persons', 'Accountant', 'Engineer', 'Software Developer']
-        },
-    ]);
-
-//View Employees
-const viewemployees = () =>
-    inquirer.prompt([
-        {
-            type: '',
-            name: '',
-            message: '',
-        },
-    ]);
 
 //Add departments
-const startup = () =>
+const addDepartment = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'Input',
+            name: 'name',
+            message: 'What is the name of the department?',
         },
-    ])
+    ]);
 
 //Add Roles
-const startup = () =>
+const addRole = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'Input',
+            name: 'name',
+            message: 'What is the name of the role?',
         },
-    ])
+        {
+            type: 'Input',
+            name: 'salary',
+            message: 'What is the salary of the role?',
+        },
+        {
+            type: 'Input',
+            name: 'department',
+            message: 'What department is the role in?',
+        },
+    ]);
 
 //Add Employees
-const startup = () =>
+const addEmployee = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'Input',
+            name: 'first name',
+            message: 'What is their first name?',
         },
-    ])
+        {
+            type: 'Input',
+            name: 'last name',
+            message: 'What is their last name?',
+        },
+        {
+            type: 'Input',
+            name: 'role',
+            message: 'What is their role?',
+        },
+    ]);
 
 //Update employee roles 
-const startup = () =>
+const updateRole = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'list',
+            name: 'role select',
+            message: 'Which employee do you want to update?',
+            choices: ['']
         },
-    ])
+    ]);
+
+// //View departments
+// const viewDepartments = () =>
+//     inquirer.prompt([
+//         {
+//             type: 'list',
+//             name: 'viewDepartment',
+//             message: 'Which department would you like to view?',
+//             choices: ['Sales', 'Finance', 'Customer Service', 'Manufacturing'],
+//         },
+//     ]);
+
+// //View Roles
+// const viewroles = () =>
+//     inquirer.prompt([
+//         {
+//             type: 'list',
+//             name: 'roles',
+//             message: 'Which role would you like to view?',
+//             choices: ['Sales leads', 'Sales person', 'Accountant', 'Engineer', 'Software Developer', 'Customer service rep']
+//         },
+//     ]);
+
+// //View Employees
+// const viewemployees = () =>
+//     inquirer.prompt([
+//         {
+//             type: 'list',
+//             name: 'which',
+//             message: '',
+//         },
+//     ]);
+
+
 module.exports = prompts;
