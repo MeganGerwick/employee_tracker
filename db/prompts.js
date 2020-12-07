@@ -12,37 +12,39 @@ const startup = () =>
             message: 'What would you like to do?',
             choices: ['View departments', 'View roles', 'View employees', 'Add dpartments', 'Add roles', 'Add employees', "Update employee roles"],
         },
-    ])
+    ]);
 
 //View departments
-const startup = () =>
+const viewDepartments = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'list',
+            name: 'viewDepartment',
+            message: 'Which department would you like to view?',
+            choices: ['Sales', 'Finance', 'Customer Service', 'Manufacturing'],
         },
-    ])
+    ]);
 
 //View Roles
-const startup = () =>
+const viewroles = () =>
     inquirer.prompt([
         {
-            type: '',
-            name: '',
-            message: '',
+            type: 'list',
+            name: 'roles',
+            message: 'Which role would you like to view?',
+            choices: ['Sales leads', 'Sales persons', 'Accountant', 'Engineer', 'Software Developer']
         },
-    ])
+    ]);
 
 //View Employees
-const startup = () =>
+const viewemployees = () =>
     inquirer.prompt([
         {
             type: '',
             name: '',
             message: '',
         },
-    ])
+    ]);
 
 //Add departments
 const startup = () =>
