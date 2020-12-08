@@ -25,13 +25,28 @@ prompts.startup()
             prompts.startup();
         };
         if (data.startup === 'View roles') {
-            //function to show table of roles 
+            connection.viewRoles()
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            ;
+
             prompts.startup();
         };
         if (data.startup === 'View employees') {
-            //function to show table of employees
-            prompts.startup();
+            connection.viewEmployees()
+                .then(data => {
+                    console.log(data);
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+            ;
         };
+        prompts.startup();
         if (data.startup === 'Add department') {
             prompts.addDepartment();
             //INSERT INTO department FUNCTION
