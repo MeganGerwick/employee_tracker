@@ -111,7 +111,7 @@ const roleAdd = () => {
                 function (err) {
                     if (err) throw err;
                     console.log('Role added!');
-                    prompts.startup();
+                    startup();
                 }
             );
 
@@ -133,7 +133,7 @@ const employeeAdd = () => {
                     if (err) throw err;
                     console.log('Employee added!');
 
-                    prompts.startup();
+                    startup();
                 }
             );
 
@@ -142,4 +142,4 @@ const employeeAdd = () => {
 };
 
 
-
+startup();
