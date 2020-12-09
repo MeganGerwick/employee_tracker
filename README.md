@@ -16,7 +16,7 @@ This site allows for users to organize departments, roles and employees within a
 - MySQL
 
 ## Video Demonstration
-https://youtu.be/DSHvFsSNeF0
+To see a full video demonstration of this application, please visit: https://youtu.be/DSHvFsSNeF0
 
 ## Screenshots of Application
 ![employee tracker](https://user-images.githubusercontent.com/69534417/101583542-4c722900-39a1-11eb-8210-3eda60f1c005.PNG)
