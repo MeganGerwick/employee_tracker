@@ -5,112 +5,141 @@ const asciiartlogo = require('asciiart-logo');
 const prompts = require('./prompts.js');
 const funct = require('./functions');
 const connection = require('./db/connection');
+const { viewRoles, viewEmployees } = require('./functions');
+
+//FUNCTIONS
+
+//View items functions
+
+const startup = () => {
+    prompts.startup()
+        .then(data => {
+            switch (data.startup) {
+                case 'View departments':
+                    departments();
+                    break;
+                case 'View roles':
+                    roles();
+                    break;
+                case 'View employees':
+                    employees();
+                    break;
+                case "Add department":
+                    departmentAdd();
+                    break;
+                case "Add role":
+                    roleAdd();
+                    break;
+                case "Add employee":
+                    employeeAdd();
+                    break;
+                default:
+                    console.log("Error");
+            };
+        });
+    ;
+};
 
 
-prompts.startup()
-    .then(data => {
-        console.log(data);
-        if (data.startup === 'View departments') {
-            funct.viewDepartment()
-                .then(data => {
-                    console.table(data);
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            ;
-        };
+const departments = () => {
+    funct.viewDepartment()
+        .then(data => {
+            console.table(data);
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    ;
+    startup();
+};
 
 
-        if (data.startup === 'View roles') {
-            funct.viewRoles()
-                .then(data => {
-                    console.table(data);
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            ;
-        };
-        if (data.startup === 'View employees') {
-            funct.viewEmployees()
-                .then(data => {
-                    console.table(data);
-                })
-                .catch(error => {
-                    console.log(error)
-                });
-            prompts.startup();
+const roles = () => {
+    funct.viewRoles()
+        .then(data => {
+            console.table(data);
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    ;
+    startup();
+};
 
-        };
+const employees = () => {
+    funct.viewEmployees()
+        .then(data => {
+            console.table(data);
+        })
+        .catch(error => {
+            console.log(error)
+        });
+    ;
+    startup();
+};
 
-        if (data.startup === 'Add department') {
-            prompts.addDepartment()
-                .then(function (answer) {
-                    connection.query(
-                        'INSERT INTO department SET ?',
-                        {
-                            name: answer.name,
-                        },
-                        function (err) {
-                            if (err) throw err;
-                            console.log('Department added!');
-                            prompts.startup();
-                        }
-                    );
+const departmentAdd = () => {
+    prompts.addDepartment()
+        .then(function (answer) {
+            connection.query(
+                'INSERT INTO department SET ?',
+                {
+                    name: answer.name,
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log('Department added!');
+                    startup();
+                }
+            );
 
-                });
-            ;
-        };
+        });
 
-        if (data.startup === 'Add role') {
-            prompts.addRole()
-                .then(function (answer) {
-                    connection.query(
-                        'INSERT INTO role SET ?',
-                        {
-                            title: answer.name,
-                            salary: answer.salary,
-                            department: answer.department,
-                        },
-                        function (err) {
-                            if (err) throw err;
-                            console.log('Role added!');
-                            prompts.startup();
-                        }
-                    );
+    ;
+};
 
-                });
-            ;
-        };
-        if (data.startup === 'Add employee') {
-            prompts.addEmployee()
-                .then(function (answer) {
-                    connection.query(
-                        'INSERT INTO employee SET ?',
-                        {
-                            first_name: answer.firstname,
-                            last_name: answer.lastname,
-                            role: answer.role,
-                        },
-                        function (err) {
-                            if (err) throw err;
-                            console.log('Role added!');
-                            prompts.startup();
-                        }
-                    );
+const roleAdd = () => {
+    prompts.addRole()
+        .then(function (answer) {
+            connection.query(
+                'INSERT INTO role SET ?',
+                {
+                    title: answer.name,
+                    salary: answer.salary,
+                    department: answer.department,
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log('Role added!');
+                    prompts.startup();
+                }
+            );
 
-                });
-            ;
-        };
-        if (data.startup === 'Update employee roles') {
-            prompts.updateRole();
-            //
-            //display employee function
-            prompts.startup();
-        };
-    });
+        });
+    ;
+};
 
-;
+const employeeAdd = () => {
+    prompts.addEmployee()
+        .then(function (answer) {
+            connection.query(
+                'INSERT INTO employee SET ?',
+                {
+                    first_name: answer.firstname,
+                    last_name: answer.lastname,
+                    role: answer.role,
+                },
+                function (err) {
+                    if (err) throw err;
+                    console.log('Employee added!');
+
+                    prompts.startup();
+                }
+            );
+
+        });
+    ;
+};
+
 
 
