@@ -33,6 +33,9 @@ const startup = () => {
                 case "Add employee":
                     employeeAdd();
                     break;
+                case "Update employee role":
+                    employeeupdate();
+                    break;
                 default:
                     console.log("Error");
             };
@@ -99,28 +102,68 @@ const departmentAdd = () => {
 };
 
 const roleAdd = () => {
-    prompts.addRole()
-        .then(function (answer) {
-            connection.query(
-                'INSERT INTO role SET ?',
-                {
-                    title: answer.name,
-                    salary: answer.salary,
-                    department: answer.department,
-                },
-                function (err) {
-                    if (err) throw err;
-                    console.log('Role added!');
-                    startup();
-                }
-            );
 
-        });
-    ;
+    connection.query('SELECT * FROM department', function (err, results) {
+        const choices = function () {
+            var choiceArray = [];
+            for (var i = 0; i < results.length; i++) {
+                choiceArray.push(results[i].name);
+            }
+            return choiceArray;
+        }
+        prompts.addRole(choices)
+            .then(function (answer) {
+                connection.query(
+                    'INSERT INTO role SET ?',
+                    {
+                        title: answer.name,
+                        salary: answer.salary,
+                        department: answer.department,
+                    },
+                    function (err) {
+                        if (err) throw err;
+                        console.log('Role added!');
+                        startup();
+                    }
+                );
+
+            });
+    });
 };
 
 const employeeAdd = () => {
-    prompts.addEmployee()
+    connection.query('SELECT * FROM role', function (err, results) {
+        const choices = function () {
+            var choiceArray = [];
+            for (var i = 0; i < results.length; i++) {
+                choiceArray.push(results[i].title);
+            }
+            return choiceArray;
+        }
+        prompts.addEmployee(choices)
+            .then(function (answer) {
+
+                connection.query(
+                    'INSERT INTO employee SET ?',
+                    {
+                        first_name: answer.firstname,
+                        last_name: answer.lastname,
+                        role: answer.role,
+                        employee_id: answer.employeeid
+                    },
+                    function (err) {
+                        if (err) throw err;
+                        console.log('Employee added!');
+
+                        startup();
+                    }
+                );
+
+            });
+    });
+};
+const employeeupdate = () => {
+    prompts.updateEmployee()
         .then(function (answer) {
             connection.query(
                 'INSERT INTO employee SET ?',
@@ -140,6 +183,5 @@ const employeeAdd = () => {
         });
     ;
 };
-
 
 startup();
